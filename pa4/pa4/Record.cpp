@@ -1,0 +1,42 @@
+#include "Record.h"
+
+Record::Record(string theNumber, string theLast,
+	string theFirst, int theAge, int theClass)
+{
+	number = theNumber;
+	lastName = theLast;
+	firstName = theFirst;
+	age = theAge;
+	classNum = theClass;
+}
+
+string Record::getNumber() const
+{
+	return number;
+}
+
+string Record::getLast() const
+{
+	return lastName;
+}
+
+string Record::getFirst() const
+{
+	return firstName;
+}
+
+int Record::getAge() const
+{
+	return age;
+}
+
+int Record::getClass() const
+{
+	return classNum;
+}
+
+void Record::print() const
+{
+	cout << number << " " << lastName << " " 
+		<< firstName << " " << age << " " << classNum << endl;
+}

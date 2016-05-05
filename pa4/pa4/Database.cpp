@@ -1,0 +1,121 @@
+#include "Database.h"
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <iterator>
+using namespace std;
+
+Database::Database(string filename)
+{
+	//TODO
+	/*
+	   Read the file line by line
+	   For each line, call parse_records to create Record object, and push it into the vector
+	   Traverse the vector, call Insert to set up two indexes.
+	*/
+	
+	// while loop
+	while(true) {
+			string line;
+			Record r = parse_records(line);
+			records.push_back(r);
+			break;
+	}
+
+	for(vector<Record>::iterator i = records.begin; i != records.end; i++) {
+		Insert(&(*i), 'S');
+		Insert(&(*i), 'A');
+	}
+	
+}
+
+void Database::Insert(Record* record, char indexType)
+{
+	//TODO
+	// According to indexType, insert record into different indexes
+	
+}
+
+
+void Database::Find(KeyType k, char indexType) const
+{
+	//TODO
+	// According to indexType, find record(s) from different indexes
+
+}
+
+
+bool Database::DeletePrimary(KeyType k)
+{
+	//TODO
+	// Remove the reference of record with primary key k from the primary index
+
+}
+
+bool Database::DeleteSecondary(KeyType primekey, KeyType k, char indexType)
+{
+	//TODO
+	// Remove the reference of record with primary key primekey from the secondary index
+
+}
+
+
+Record Database::parse_records(string line)
+{
+	// Find the index of the first blank (the end of first string).
+	int first_end = line.find(' ');
+	if (first_end == string::npos) {
+		cout << "Error: missing blank" << endl;
+	}
+	string stuNumber = line.substr(0, first_end);
+
+	// Find the index of the second blank (the end of second string).
+	int second_end = line.find(' ', first_end + 1);
+	if (second_end == string::npos) {
+		cout << "Error: missing blank" << endl;
+		// and return from the function
+	}
+	int second_start = first_end + 1;
+	string lastname = line.substr(second_start, second_end - second_start);
+
+	// Skip the blanks in order to find the begining of the third string
+	int third_start;
+	for (third_start = second_end; third_start < line.length(); third_start++)
+	{
+		if (line.at(third_start) != ' ') break;
+	}
+
+	// Find the end of third string
+	int third_end = line.find(' ', third_start);
+	if (third_end == string::npos) {
+		cout << "Error: missing blank" << endl;
+		// and return from the function
+	}
+	string firstname = line.substr(third_start, third_end - third_start);
+
+	// Skip the blanks in order to find the begining of the fourth string
+	int fourth_start;
+	for (fourth_start = third_end; fourth_start < line.length(); fourth_start++)
+	{
+		if (line.at(fourth_start) != ' ') break;
+	}
+	// Find the end of fourth string
+	int fourth_end = line.find(' ', fourth_start);
+	if (fourth_end == string::npos) {
+		cout << "Error: missing blank" << endl;
+		// and return from the function
+	}
+	string age_str = line.substr(fourth_start, fourth_end - fourth_start);
+	istringstream age_stream(age_str);
+	int age;
+	age_stream >> age;
+
+	// Get the fifth string
+	string class_str = line.substr(fourth_end + 1);
+	istringstream class_stream(class_str);
+	int classnumber;
+	class_stream >> classnumber;
+
+	Record new_student(stuNumber, lastname, firstname, age, classnumber);
+	return new_student;
+}
