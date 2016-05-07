@@ -34,14 +34,15 @@ Database::Database(string filename)
 
 void Database::Insert(Record* record, char indexType)
 {
-	//TODO
 	// According to indexType, insert record into different indexes
 	if(indexType == 'S') {
 		indexS.insert(record->getNumber(), record);
 	} else if(indexType == 'A') {
 		indexA.insert(record->getAge(), record);
-	} else {
-		cerr << "Invalid index type.";	
+	}
+	else {
+		cerr << "Invalid index type.";
+	}
 }
 
 
