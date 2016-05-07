@@ -7,25 +7,27 @@ using namespace std;
 
 Database::Database(string filename)
 {
-	//TODO
-	/*
-	   Read the file line by line
-	   For each line, call parse_records to create Record object, and push it into the vector
-	   Traverse the vector, call Insert to set up two indexes.
-	*/
-	
-	// while loop
-	while(true) {
-			string line;
+
+	ifstream infile;
+	string filename = "records.txt";
+	bool file_open;
+
+	infile.open(filename.c_str());
+	if (infile.fail()) {
+		cerr << "Invalid database file.";
+		exit(1);
+	} else {
+		string line;
+		while (!infile.eof()) {
+			getline(infile, line);
 			Record r = parse_records(line);
 			records.push_back(r);
-			break;
-	}
-
-	for(vector<Record>::iterator i = records.begin; i != records.end; i++) {
-		Insert(&(*i), 'S');
-		Insert(&(*i), 'A');
-	}
+		}
+		infile.close();
+		for (vector<Record>::iterator i = records.begin; i != records.end; i++) {
+			Insert(&(*i), 'S');
+			Insert(&(*i), 'A');
+		}
 	
 }
 
