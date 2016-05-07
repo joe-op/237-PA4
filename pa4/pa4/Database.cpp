@@ -16,7 +16,8 @@ Database::Database(string filename)
 	if (infile.fail()) {
 		cerr << "Invalid database file.";
 		exit(1);
-	} else {
+	}
+	else {
 		string line;
 		while (!infile.eof()) {
 			getline(infile, line);
@@ -28,7 +29,7 @@ Database::Database(string filename)
 			Insert(&(*i), 'S');
 			Insert(&(*i), 'A');
 		}
-	
+	}	
 }
 
 void Database::Insert(Record* record, char indexType)
