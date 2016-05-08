@@ -79,9 +79,25 @@ void Database::Find(KeyType k, char indexType) const
 
 bool Database::DeletePrimary(KeyType k)
 {
-	//TODO
-	// Remove the reference of record with primary key k from the primary index
+	bool removed;
+	string key_str;
 
+	if (k.getKey1() == "") {
+		removed = indexA.removePrimary(k.getKey2());
+		key_str = to_string(k.getKey2());
+	}
+	else {
+		removed = indexS.removePrimary(k.getKey1());
+		key_str = k.getKey1();
+	}
+
+	if (removed) {
+		cout << "DELETE RECORD " << key_str << " FROM PRIMARY INDEX SUCCESSFULLY!" << endl;
+	}
+	else {
+		cout << "DELETE ** FAIL TO DELETE RECORD "
+			<< key_str << "FROM PRIMARY INDEX" << endl;
+	}
 }
 
 bool Database::DeleteSecondary(KeyType primekey, KeyType k, char indexType)
