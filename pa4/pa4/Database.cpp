@@ -53,8 +53,6 @@ void Database::Find(KeyType k, char indexType) const
 			cout << "FIND ** NO RECORDS FOUND FOR KEY " << k.getKey2() << endl;
 		}
 		else {
-			cout << "Age Iterator";
-			cout << " for " << ages->get_records()->size() << endl;
 			for (list<Record*>::iterator i = ages->get_records()->begin();
 			i != ages->get_records()->end(); i++)
 			{
@@ -91,7 +89,7 @@ bool Database::DeletePrimary(KeyType k)
 	}
 	else {
 		cout << "DELETE ** FAIL TO DELETE RECORD "
-			<< key_str << "FROM PRIMARY INDEX" << endl;
+			<< key_str << " FROM PRIMARY INDEX" << endl;
 	}
 	
 	return removed;
