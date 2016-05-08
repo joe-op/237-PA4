@@ -36,7 +36,7 @@ int main()
 
 	Database* db = new Database("records.txt");
 
-	cout << "Set up database and indexes  successfully" << endl;
+	cout << "Set up database and indices successfully" << endl;
 	cout << endl;
 
 	ifstream infile;
@@ -60,6 +60,7 @@ int main()
 
 void issueCommand(string line, Database* db)
 {
+	cout << line << endl;
 	cout << "********************" << endl;
 	string command = line.substr(0, 2);
 	if (command == "DP")

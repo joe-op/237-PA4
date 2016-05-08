@@ -109,7 +109,7 @@ bool Database::DeleteSecondary(KeyType primekey, KeyType k, char indexType)
 		return removed;
 	}
 
-	cout << "DELETE ** FAIL TO DELETE RECORD " << k.getKey1() << " FROM SECONDARY INDEX" << endl;
+	cout << "DELETE ** SECONDARY KEY WITH WRONG INDEX TYPE" << endl;
 	return false;
 
 }
