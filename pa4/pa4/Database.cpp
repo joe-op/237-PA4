@@ -107,7 +107,43 @@ void Database::Find(KeyType k, char indexType) const
  * displays notice and returns false otherwise.
  */
 bool Database::FindRange(KeyType low, KeyType high, char indexType) {
-
+	bool found = false;
+	if (indexType == 'A') {
+		for (int i = low.getKey2(); i <= high.getKey2(); i++) {
+			TreeNode<int> *node = indexA.find(i);
+			if (node != NULL) {
+				found = true;
+				for (list<Record*>::iterator i = node->get_records()->begin();
+				i != node->get_records()->end(); i++) {
+					(*i)->print();
+				}
+			}
+		}
+		if (!found) {
+			cout << "FINDRANGE ** NO RECORDS FOUND BETWEEN " << low.getKey2()
+				<< " AND " << high.getKey2() << endl;
+		}
+	}
+	else if (indexType == 'S') {
+		int low_int, high_int;
+		stringstream(low.getKey1()) >> low_int;
+		stringstream(high.getKey1()) >> high_int;
+		for (int i = low_int; i <= high_int; i++) {
+			TreeNode<string> *node = indexS.find(to_string(i));
+			if (node != NULL) {
+				found = true;
+				node->get_records()->front()->print();
+			}
+		}
+		if (!found) {
+			cout << "FINDRANGE ** NO RECORDS FOUND BETWEEN " << low.getKey1()
+				<< " AND " << high.getKey1() << endl;
+		}
+	}
+	else {
+		cout << "FINDRANGE ** INVALID INDEX TYPE" << endl;
+	}
+	return found;
 }
 
 /*

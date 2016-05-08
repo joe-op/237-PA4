@@ -87,6 +87,27 @@ void issueCommand(string line, Database* db)
 			}
 			db->Find(key2, indexType);
 		}
+		else if (command == "FR") {
+			// FR S 9600000 9630000
+			// FR A 18 22
+			KeyType key_low, key_high;
+			int first_end = line.find(' ');
+			int second_start = first_end + 1;
+			int second_end = line.find(' ', second_start);
+			int third_start = second_end + 1;
+			int third_end = line.find(' ', third_start);
+			int fourth_start = third_end + 1;
+			if (indexType == 'S') {
+				key_low.setKey1(line.substr(third_start, third_end - third_start));
+				key_high.setKey1(line.substr(fourth_start));
+				db->FindRange(key_low, key_high, 'S');
+			}
+			else {
+				key_low.setKey2(stringToNumber(line.substr(third_start, third_end - third_start)));
+				key_high.setKey2(stringToNumber(line.substr(fourth_start)));
+				db->FindRange(key_low, key_high, 'A');
+			}
+		}
 	}
 	cout << endl << endl << endl;
 }
