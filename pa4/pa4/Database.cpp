@@ -99,6 +99,18 @@ void Database::Find(KeyType k, char indexType) const
 }
 
 /*
+ * FindRange: Finds records within a certain range.
+ * Input: KeyType low, KeyType high, char indexType
+ * Output: bool
+ * Searches for records in a certain range.
+ * If records are found, displays records and returns true;
+ * displays notice and returns false otherwise.
+ */
+bool Database::FindRange(KeyType low, KeyType high, char indexType) {
+
+}
+
+/*
  * DeletePrimary: deletes the primary key from the index
  * Input: KeyType
  * Output: bool
@@ -150,6 +162,16 @@ bool Database::DeleteSecondary(KeyType primekey, KeyType k, char indexType)
 
 }
 
+/*
+ * Delete: delete a record from the database
+ * Input: KeyType
+ * Output: bool
+ * Finds the record associated with primekey,
+ * deletes it from the indices,
+ * and marks the record as deleted.
+ * Returns true if record is found and not already deleted,
+ * false otherwise.
+ */
 bool Database::Delete(KeyType primekey) {
 	int age = 0;
 	bool found = false;

@@ -22,6 +22,8 @@ public:
 	//Find a record in indexType denoted index with a keyvalue k and print them
 	void Find(KeyType k, char indexType) const;
 	
+	bool FindRange(KeyType low, KeyType high, char indexType);
+
 	//Delete the record with primary key k from primary index
 	bool DeletePrimary(KeyType k);
 
