@@ -23,7 +23,7 @@ void TreeIndex<T>::insert(T key, Record* record, TreeNode<T>* & subTreeRoot)
 template<class T>
 TreeNode<T>* TreeIndex<T>::find(T key) const
 {
-	return inTree(item, root);
+	return find(item, root);
 }
 
 template<class T>
@@ -116,21 +116,25 @@ TreeNode<T>* TreeNode<T>::minRightSubTree()
 	}
 }
 
+struct matches_key {
+	bool operator() (const Record& r, string primekey) 
+	{
+		return (r.getNumber() == primekey);
+	}
+};
+
 template<class T>
 bool TreeIndex<T>::removeSecondary(T key, string primekey)
 {
-	//TODO
-	/*
-	1. Find the node with key in the index tree
-	2. Traverse the node's list records to find the record (actually its reference) with primekey
-	3. Delete the record from the list records
-	4. Check whether the list records is empty or not
-		4.1 If it is empty, delete the node from the index tree
-		4.2 Otherwise, do nothing
-	*/
 
+	TreeNode<T>* the_key = find(key);
 
+	the_key->records.remove_if(matches_key(primekey));
+	if (the_key->records.empty()) {
+		removePrimary(the_key);
+	}
 }
+
 template<class T>
 void TreeIndex<T>::deleteSubtree(TreeNode<T>*& subTreeRoot)
 {
