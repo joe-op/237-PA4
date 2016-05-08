@@ -90,7 +90,7 @@ bool Database::DeletePrimary(KeyType k)
 		removed = indexS.removePrimary(k.getKey1());
 		key_str = k.getKey1();
 	}
-
+	/*
 	if (removed) {
 		cout << "DELETE RECORD " << key_str << " FROM PRIMARY INDEX SUCCESSFULLY!" << endl;
 	}
@@ -98,13 +98,20 @@ bool Database::DeletePrimary(KeyType k)
 		cout << "DELETE ** FAIL TO DELETE RECORD "
 			<< key_str << "FROM PRIMARY INDEX" << endl;
 	}
+	*/
+	return removed;
 }
 
 bool Database::DeleteSecondary(KeyType primekey, KeyType k, char indexType)
 {
-	//TODO
-	// Remove the reference of record with primary key primekey from the secondary index
 
+	if (indexType == 'A') {
+		bool removed = indexA.removeSecondary(k.getKey2(), primekey.getKey1());
+		return removed;
+	}
+	else {
+		return false;
+	}
 }
 
 
