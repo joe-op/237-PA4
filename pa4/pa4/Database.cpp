@@ -19,6 +19,7 @@ Database::Database(string filename)
 		string line;
 		while (!infile.eof()) {
 			getline(infile, line);
+			cout << line << endl;
 			Record r = parse_records(line);
 			records.push_back(r);
 		}
@@ -88,7 +89,7 @@ bool Database::DeletePrimary(KeyType k)
 		removed = indexS.removePrimary(k.getKey1());
 		key_str = k.getKey1();
 	}
-	/*
+	
 	if (removed) {
 		cout << "DELETE RECORD " << key_str << " FROM PRIMARY INDEX SUCCESSFULLY!" << endl;
 	}
@@ -96,7 +97,7 @@ bool Database::DeletePrimary(KeyType k)
 		cout << "DELETE ** FAIL TO DELETE RECORD "
 			<< key_str << "FROM PRIMARY INDEX" << endl;
 	}
-	*/
+	
 	return removed;
 }
 
@@ -105,11 +106,18 @@ bool Database::DeleteSecondary(KeyType primekey, KeyType k, char indexType)
 
 	if (indexType == 'A') {
 		bool removed = indexA.removeSecondary(k.getKey2(), primekey.getKey1());
+		if (removed) {
+			cout << "DELETE RECORD " << k.getKey2() << " FROM SECONDARY INDEX SUCESSFULLY!" << endl;
+		}
+		else {
+			cout << "DELETE ** FAIL TO DELETE RECORD " << k.getKey2() << " FROM SECONDARY INDEX" << endl;
+		}
 		return removed;
 	}
-	else {
-		return false;
-	}
+
+	cout << "DELETE ** FAIL TO DELETE RECORD " << k.getKey1() << " FROM SECONDARY INDEX" << endl;
+	return false;
+
 }
 
 

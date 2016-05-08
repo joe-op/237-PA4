@@ -9,6 +9,17 @@
 * 12 May 2016
 */
 
+/*
+ * TODO 2016-05-08:
+ * 1) Find on secondary key is only displaying one value
+ * 2) Remove by primary key should display number, not age
+ * 3) References are not actually being removed
+ */
+
+
+
+
+
 //Run command line on database db
 //Use Database pointer as parameter
 void issueCommand(string line, Database* db);
@@ -44,7 +55,7 @@ int main()
 		}
 	}
 
-	pause_237(true);
+	pause_237(false);
 }
 
 void issueCommand(string line, Database* db)

@@ -11,8 +11,15 @@ template<class T>
 void TreeIndex<T>::insert(T key, Record* record, TreeNode<T>* & subTreeRoot)
 {
 	if (subTreeRoot == NULL) {
-		subTreeRoot = new TreeNode(T, NULL, NULL);
+		subTreeRoot = new TreeNode<T>(key, NULL, NULL);
 		subTreeRoot->records.push_back(record);
+	}
+	else if (key < subTreeRoot->key)
+	{
+		insert(key, record, subTreeRoot->leftlink);
+	}
+	else {
+		insert(key, record, subTreeRoot->rightlink);
 	}
 	//TODO: Refer to binary search tree sample code 
 	//Besides insert the key into the tree, you also need to insert record into the list records
@@ -80,7 +87,7 @@ TreeNode<T>* TreeNode<T>::remove(T key, TreeNode<T> *parent)
 			return NULL;
 		}
 	}
-	else if(item > this->data) {
+	else if(key > this->key) {
 		if (rightlink != NULL) {
 			return rightlink->remove(key, this);
 		}
@@ -118,7 +125,7 @@ TreeNode<T>* TreeNode<T>::minRightSubTree()
 
 template<class T>
 list<Record*> *TreeNode<T>::get_records() {
-	return records;
+	return &records;
 }
 
 template<class T>
@@ -130,7 +137,7 @@ bool TreeIndex<T>::removeSecondary(T key, string primekey)
 		return false;
 	}
 	else {
-		cout << the_key->records[0];
+		the_key->get_records()[0];
 	}
 }
 
