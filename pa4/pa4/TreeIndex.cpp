@@ -49,20 +49,71 @@ TreeNode<T>* TreeIndex<T>::find(T key, TreeNode<T>* subTreeRoot) const
 template<class T>
 bool TreeIndex<T>::removePrimary(T key)
 {
-	//TODO: Refer to binary search tree sample code 
+	if (root == NULL) {
+		return false;
+	}
+	else {
+		if (key == root->key) {
+			TreeNode<T> auxRoot(key, NULL, NULL);
+			auxRoot.leftlink = root;
+			TreeNode<T>* removedNode = root->remove(item, &auxRoot);
+			root = auxRoot.leftlink;
+			if (removedNode != NULL) {
+				delete removedNode;
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
 }
 
 template<class T>
 TreeNode<T>* TreeNode<T>::remove(T key, TreeNode<T> *parent)
 {
-	if (root != NULL) {
-		if(key == r)
+	if (key < this->key) {
+		if (leftlink != NULL) {
+			return leftlink->remove(key, this);
+		}
+		else {
+			return NULL;
+		}
+	}
+	else if(item > this->data) {
+		if (rightlink != NULL) {
+			return rightlink->remove(key, this);
+		}
+		else {
+			return NULL;
+		}
+	}
+	else {
+		if (leftlink != NULL && rightlink != NULL) {
+			this->key = rightlink->minRightSubTree()->key;
+			this->records = rightlink->minRightSubTree()->records;
+			return rightlink->remove(this->key, this);
+		}
+		else if (parent->leftlink == this) {
+			parent->leftlink = (leftlink != NULL) ? leftlink : rightlink;
+			return this;
+		}
+		else if (parent->rightlink == this) {
+			parent->rightlink = (leftlink != NULL) ? leftlink : rightlink;
+			return this;
+		}
+	}
 }
 
 template<class T>
 TreeNode<T>* TreeNode<T>::minRightSubTree() 
 {
-	//TODO: Refer to binary search tree sample code 
+	if (this->leftlink == NULL) {
+		return this;
+	}
+	else {
+		return leftlink->minRightSubTree();
+	}
 }
 
 template<class T>
