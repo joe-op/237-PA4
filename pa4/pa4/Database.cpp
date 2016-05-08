@@ -5,6 +5,13 @@
 #include <iterator>
 using namespace std;
 
+/*
+ * Default constructor for Database
+ * Input: string
+ * Output: Database object
+ * Loads a database from filename.
+ * Creates and fills indices for Number and Age.
+ */
 Database::Database(string filename)
 {
 
@@ -31,6 +38,14 @@ Database::Database(string filename)
 	}	
 }
 
+/*
+ * Insert: inserts a record pointer into an index
+ * Input: Record*, char
+ * Output: none
+ * Inserts a pointer to record into the index
+ * corresponding to 'S' or 'A'.
+ * Gives an error if indexType is not 'S' or 'A'.
+ */
 void Database::Insert(Record* record, char indexType)
 {
 	// According to indexType, insert record into different indexes
@@ -44,7 +59,13 @@ void Database::Insert(Record* record, char indexType)
 	}
 }
 
-
+/*
+ * Find: finds records associated with k
+ * Input: KeyType, char
+ * Output: none
+ * If k is found in the corresponding index,
+ * prints all records associated with k.
+ */
 void Database::Find(KeyType k, char indexType) const
 {
 	if (indexType == 'A') {
@@ -75,7 +96,13 @@ void Database::Find(KeyType k, char indexType) const
 
 }
 
-
+/*
+ * DeletePrimary: deletes the primary key from the index
+ * Input: KeyType
+ * Output: bool
+ * Returns true if record is found, false otherwise.
+ * Does not delete record from the database.
+ */
 bool Database::DeletePrimary(KeyType k)
 {
 	bool removed;
@@ -95,6 +122,13 @@ bool Database::DeletePrimary(KeyType k)
 	return removed;
 }
 
+/*
+ * DeleteSecondary: Deletes record with number primekey and age k from index 'A'
+ * Input: KeyType, KeyType, char
+ * Output: bool
+ * Returns true if input is valid and record is found, false otherwise.
+ * Can only be used for indexA since age is the only secondary index.
+ */
 bool Database::DeleteSecondary(KeyType primekey, KeyType k, char indexType)
 {
 
@@ -114,7 +148,11 @@ bool Database::DeleteSecondary(KeyType primekey, KeyType k, char indexType)
 
 }
 
-
+/*
+ * parse_records: parses a line for inclusion in the database
+ * Input: string
+ * Output: none
+ */
 Record Database::parse_records(string line)
 {
 	// Find the index of the first blank (the end of first string).
