@@ -116,6 +116,11 @@ TreeNode<T>* TreeNode<T>::minRightSubTree()
 	}
 }
 
+template<class T>
+list<Record*> *TreeNode<T>::get_records() const {
+	return &records;
+}
+
 struct matches_key {
 	bool operator() (const Record& r, string primekey) 
 	{
