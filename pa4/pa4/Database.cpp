@@ -48,8 +48,31 @@ void Database::Insert(Record* record, char indexType)
 
 void Database::Find(KeyType k, char indexType) const
 {
-	//TODO
-	// According to indexType, find record(s) from different indexes
+	if (indexType == 'A') {
+		TreeNode<int> *ages = indexA.find(k.getKey2());
+		if(ages == NULL || ages->get_records()->empty()) {
+			cout << "FIND ** NO RECORDS FOUND FOR KEY " << k.getKey2() << endl;
+		}
+		else {
+			for (list<Record*>::iterator i = ages->get_records()->begin;
+			i != ages->get_records()->end(); i++)
+			{
+				(*i)->print();
+			}
+		}
+	}
+	else if (indexType == 'S') {
+		TreeNode<string> *number = indexS.find(k.getKey1());
+		if (number == NULL || number->get_records()->empty()) {
+			cout << "FIND ** NO RECORDS FOUND FOR KEY " << k.getKey1() << endl;
+		}
+		else {
+			number->get_records()->front()->print;
+		}
+	}
+	else {
+		cout << "FIND ** WRONG INDEX TYPE" << endl;
+	}
 
 }
 
