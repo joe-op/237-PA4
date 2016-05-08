@@ -6,6 +6,12 @@
 using namespace std;
 
 /*
+* CS237 PA4
+* Joe Opseth & Jens Myklebust
+* 8 May 2016
+*/
+
+/*
  * Default constructor for Database
  * Input: string
  * Output: Database object

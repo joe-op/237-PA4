@@ -1,5 +1,11 @@
 #include "Record.h"
 
+/*
+* CS237 PA4
+* Joe Opseth & Jens Myklebust
+* 8 May 2016
+*/
+
 Record::Record(string theNumber, string theLast,
 	string theFirst, int theAge, int theClass)
 {

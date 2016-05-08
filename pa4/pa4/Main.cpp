@@ -6,7 +6,7 @@
 /*
 * CS237 PA4
 * Joe Opseth & Jens Myklebust
-* 12 May 2016
+* 8 May 2016
 */
 
 //Run command line on database db
@@ -19,8 +19,8 @@ void pause_237(bool have_newline);
 
 int main()
 {
-	cout << "Relational Database by Joe Opseth - CS 237 PA4" << endl;
-	cout << "Bonus features implemented: none" << endl;
+	cout << "Relational Database by Group 5 - CS 237 PA4" << endl;
+	cout << "Bonus features implemented: Delete and FindRange" << endl;
 	cout << "Loading database records.txt . . . " << endl;
 
 	Database* db = new Database("records.txt");

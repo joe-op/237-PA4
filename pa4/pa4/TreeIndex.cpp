@@ -1,6 +1,12 @@
 #include"TreeIndex.h"
 
 /*
+* CS237 PA4
+* Joe Opseth & Jens Myklebust
+* 8 May 2016
+*/
+
+/*
  * Insert record into index
  * Input: key (string or int); pointer to record
  * Output: none
