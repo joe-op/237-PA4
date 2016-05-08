@@ -140,19 +140,18 @@ bool TreeIndex<T>::removeSecondary(T key, string primekey)
 {
 
 	TreeNode<T>* the_key = find(key);
-	list<Record*> records = the_key->records;
 	if (the_key == NULL || the_key->records.empty()) {
 		return false;
 	}
 	else {
 		list<Record*> remove_records;
-		for (list<Record*>::iterator i = records.begin(); i != records.end(); i++) {
+		for (list<Record*>::iterator i = the_key->records.begin(); i != the_key->records.end(); i++) {
 			if ((*i)->getNumber().compare(primekey) == 0) {
 				remove_records.push_back(*i);
 			}
 		}
 		for (list<Record*>::iterator i = remove_records.begin(); i != remove_records.end(); i++) {
-			records.remove(*i);
+			the_key->records.remove(*i);
 		}
 	}
 }
