@@ -22,6 +22,8 @@ public:
 
 	void set_deleted(bool deleted);
 
+	bool get_deleted();
+
 private:
 	string number;
 	string lastName;

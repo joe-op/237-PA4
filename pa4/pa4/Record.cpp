@@ -45,3 +45,7 @@ void Record::print() const
 void Record::set_deleted(bool deleted) {
 	is_deleted = deleted;
 }
+
+bool Record::get_deleted() {
+	return is_deleted;
+}

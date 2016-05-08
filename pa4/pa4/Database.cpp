@@ -155,16 +155,21 @@ bool Database::Delete(KeyType primekey) {
 	bool found = false;
 	for (vector<Record>::iterator i = records.begin(); i != records.end(); i++) {
 		if (i->getNumber() == primekey.getKey1()) {
-			found = true;
-			age = i->getAge();
-			i->set_deleted(true);
-
-			i = records.end();
+			if (!i->get_deleted()) {
+				found = true;
+				age = i->getAge();
+				i->set_deleted(true);
+			}
+			break;
 		}
 	}
 	if (found) {
 		indexA.removeSecondary(age, primekey.getKey1());
 		indexS.removePrimary(primekey.getKey1());
+		cout << "DELETE RECORD " << primekey.getKey1() << " FROM DATABASE SUCCESSFUL" << endl;
+	}
+	else {
+		cout << "DELETE ** FAIL TO DELETE RECORD " << primekey.getKey1() << " FROM DATABASE" << endl;
 	}
 	return found;	
 }
