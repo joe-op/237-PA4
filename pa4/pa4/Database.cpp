@@ -9,8 +9,6 @@ Database::Database(string filename)
 {
 
 	ifstream infile;
-	string filename = "records.txt";
-	bool file_open;
 
 	infile.open(filename.c_str());
 	if (infile.fail()) {
@@ -25,7 +23,7 @@ Database::Database(string filename)
 			records.push_back(r);
 		}
 		infile.close();
-		for (vector<Record>::iterator i = records.begin; i != records.end; i++) {
+		for (vector<Record>::iterator i = records.begin(); i != records.end(); i++) {
 			Insert(&(*i), 'S');
 			Insert(&(*i), 'A');
 		}
@@ -54,7 +52,7 @@ void Database::Find(KeyType k, char indexType) const
 			cout << "FIND ** NO RECORDS FOUND FOR KEY " << k.getKey2() << endl;
 		}
 		else {
-			for (list<Record*>::iterator i = ages->get_records()->begin;
+			for (list<Record*>::iterator i = ages->get_records()->begin();
 			i != ages->get_records()->end(); i++)
 			{
 				(*i)->print();
@@ -67,7 +65,7 @@ void Database::Find(KeyType k, char indexType) const
 			cout << "FIND ** NO RECORDS FOUND FOR KEY " << k.getKey1() << endl;
 		}
 		else {
-			number->get_records()->front()->print;
+			number->get_records()->front()->print();
 		}
 	}
 	else {

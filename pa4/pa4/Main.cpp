@@ -3,6 +3,12 @@
 #include <iostream>
 #include <sstream>
 
+/*
+* CS237 PA4
+* Joe Opseth & Jens Myklebust
+* 12 May 2016
+*/
+
 //Run command line on database db
 //Use Database pointer as parameter
 void issueCommand(string line, Database* db);
@@ -13,7 +19,7 @@ void pause_237(bool have_newline);
 
 int main()
 {
-	cout << "Relational Database by J. Random Student - CS 237 PA4" << endl;
+	cout << "Relational Database by Joe Opseth - CS 237 PA4" << endl;
 	cout << "Bonus features implemented: none" << endl;
 	cout << "Loading database records.txt . . . " << endl;
 
@@ -22,9 +28,21 @@ int main()
 	cout << "Set up database and indexes  successfully" << endl;
 	cout << endl;
 
-	//TODO: run commands in commands.txt line by line 
-	// by calling issueCommand function
+	ifstream infile;
+	string filename = "commands.txt";
 
+	infile.open(filename.c_str());
+	if (infile.fail()) {
+		cerr << "Invalid commands file.";
+		exit(1);
+	}
+	else {
+		string line;
+		while (!infile.eof()) {
+			getline(infile, line);
+			issueCommand(line, db);
+		}
+	}
 
 	pause_237(true);
 }

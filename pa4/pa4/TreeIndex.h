@@ -20,7 +20,7 @@ public:
 		key(theKey), leftlink(left), rightlink(right){}
 	TreeNode* remove(T key, TreeNode *parent);
 	TreeNode* minRightSubTree();
-	list<Record*> *get_records() const;
+	list<Record*> *get_records();
 	friend class TreeIndex<T>;
 private:
 	T key;

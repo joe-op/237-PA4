@@ -23,7 +23,7 @@ void TreeIndex<T>::insert(T key, Record* record, TreeNode<T>* & subTreeRoot)
 template<class T>
 TreeNode<T>* TreeIndex<T>::find(T key) const
 {
-	return find(item, root);
+	return find(key, root);
 }
 
 template<class T>
@@ -56,7 +56,7 @@ bool TreeIndex<T>::removePrimary(T key)
 		if (key == root->key) {
 			TreeNode<T> auxRoot(key, NULL, NULL);
 			auxRoot.leftlink = root;
-			TreeNode<T>* removedNode = root->remove(item, &auxRoot);
+			TreeNode<T>* removedNode = root->remove(key, &auxRoot);
 			root = auxRoot.leftlink;
 			if (removedNode != NULL) {
 				delete removedNode;
@@ -117,26 +117,20 @@ TreeNode<T>* TreeNode<T>::minRightSubTree()
 }
 
 template<class T>
-list<Record*> *TreeNode<T>::get_records() const {
-	return &records;
+list<Record*> *TreeNode<T>::get_records() {
+	return records;
 }
-
-struct matches_key {
-	bool operator() (const Record& r, string primekey) 
-	{
-		return (r.getNumber() == primekey);
-	}
-};
 
 template<class T>
 bool TreeIndex<T>::removeSecondary(T key, string primekey)
 {
 
 	TreeNode<T>* the_key = find(key);
-
-	the_key->records.remove_if(matches_key(primekey));
-	if (the_key->records.empty()) {
-		removePrimary(the_key);
+	if (the_key == NULL || the_key->records.empty()) {
+		return false;
+	}
+	else {
+		cout << the_key->records[0];
 	}
 }
 
