@@ -45,7 +45,6 @@ public:
 	TreeNode<T>* find(T key) const;
 	bool removePrimary(T key);
 	bool removeSecondary(T key, string primekey);
-
 private:
 	void insert(T key, Record* record, TreeNode<T>* & subTreeRoot);
 	TreeNode<T>* find(T key, TreeNode<T>* subTreeRoot) const;

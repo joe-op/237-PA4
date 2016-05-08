@@ -4,12 +4,16 @@
 template<class T>
 void TreeIndex<T>::insert(T key, Record* record)
 {
-	//TODO: Refer to binary search tree sample code 
+	insert(key, record, root);
 }
 
 template<class T>
 void TreeIndex<T>::insert(T key, Record* record, TreeNode<T>* & subTreeRoot)
 {
+	if (subTreeRoot == NULL) {
+		subTreeRoot = new TreeNode(T, NULL, NULL);
+		subTreeRoot->records.push_back(record);
+	}
 	//TODO: Refer to binary search tree sample code 
 	//Besides insert the key into the tree, you also need to insert record into the list records
 	
@@ -19,13 +23,27 @@ void TreeIndex<T>::insert(T key, Record* record, TreeNode<T>* & subTreeRoot)
 template<class T>
 TreeNode<T>* TreeIndex<T>::find(T key) const
 {
-	//TODO: Refer to binary search tree sample code 
+	return inTree(item, root);
 }
 
 template<class T>
 TreeNode<T>* TreeIndex<T>::find(T key, TreeNode<T>* subTreeRoot) const
 {
-	//TODO: Refer to binary search tree sample code 
+	if (subTreeRoot == NULL) {
+		return false;
+	}
+	else if (key == subTreeRoot->key) {
+		return subTreeRoot;
+	} else if(key < subTreeRoot->key) {
+		return find(key, subTreeRoot->leftlink);
+	}
+	else if(key > subTreeRoot->key) {
+		return find(key, subTreeRoot->rightlink);
+	}
+	else {
+		cerr << "Keys could not be compared.";
+		exit(1);
+	}
 }
 
 template<class T>
@@ -37,7 +55,8 @@ bool TreeIndex<T>::removePrimary(T key)
 template<class T>
 TreeNode<T>* TreeNode<T>::remove(T key, TreeNode<T> *parent)
 {
-	//TODO: Refer to binary search tree sample code 
+	if (root != NULL) {
+		if(key == r)
 }
 
 template<class T>
