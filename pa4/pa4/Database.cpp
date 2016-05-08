@@ -53,6 +53,8 @@ void Database::Find(KeyType k, char indexType) const
 			cout << "FIND ** NO RECORDS FOUND FOR KEY " << k.getKey2() << endl;
 		}
 		else {
+			cout << "Age Iterator";
+			cout << " for " << ages->get_records()->size() << endl;
 			for (list<Record*>::iterator i = ages->get_records()->begin();
 			i != ages->get_records()->end(); i++)
 			{
@@ -81,14 +83,8 @@ bool Database::DeletePrimary(KeyType k)
 	bool removed;
 	string key_str;
 
-	if (k.getKey1() == "") {
-		removed = indexA.removePrimary(k.getKey2());
-		key_str = to_string(k.getKey2());
-	}
-	else {
-		removed = indexS.removePrimary(k.getKey1());
-		key_str = k.getKey1();
-	}
+	removed = indexS.removePrimary(k.getKey1());
+	key_str = k.getKey1();
 	
 	if (removed) {
 		cout << "DELETE RECORD " << key_str << " FROM PRIMARY INDEX SUCCESSFULLY!" << endl;
@@ -107,10 +103,10 @@ bool Database::DeleteSecondary(KeyType primekey, KeyType k, char indexType)
 	if (indexType == 'A') {
 		bool removed = indexA.removeSecondary(k.getKey2(), primekey.getKey1());
 		if (removed) {
-			cout << "DELETE RECORD " << k.getKey2() << " FROM SECONDARY INDEX SUCESSFULLY!" << endl;
+			cout << "DELETE RECORD " << primekey.getKey1() << " FROM SECONDARY INDEX SUCESSFULLY!" << endl;
 		}
 		else {
-			cout << "DELETE ** FAIL TO DELETE RECORD " << k.getKey2() << " FROM SECONDARY INDEX" << endl;
+			cout << "DELETE ** FAIL TO DELETE RECORD " << primekey.getKey1() << " FROM SECONDARY INDEX" << endl;
 		}
 		return removed;
 	}

@@ -18,8 +18,15 @@ void TreeIndex<T>::insert(T key, Record* record, TreeNode<T>* & subTreeRoot)
 	{
 		insert(key, record, subTreeRoot->leftlink);
 	}
-	else {
+	else if (key > subTreeRoot->key) {
 		insert(key, record, subTreeRoot->rightlink);
+	}
+	else if(key == subTreeRoot->key){
+		subTreeRoot->records.push_back(record);
+	}
+	else {
+		cerr << "Key could not be placed";
+		exit(1);
 	}
 	//TODO: Refer to binary search tree sample code 
 	//Besides insert the key into the tree, you also need to insert record into the list records
@@ -133,11 +140,20 @@ bool TreeIndex<T>::removeSecondary(T key, string primekey)
 {
 
 	TreeNode<T>* the_key = find(key);
+	list<Record*> records = the_key->records;
 	if (the_key == NULL || the_key->records.empty()) {
 		return false;
 	}
 	else {
-		the_key->get_records()[0];
+		list<Record*> remove_records;
+		for (list<Record*>::iterator i = records.begin(); i != records.end(); i++) {
+			if ((*i)->getNumber().compare(primekey) == 0) {
+				remove_records.push_back(*i);
+			}
+		}
+		for (list<Record*>::iterator i = remove_records.begin(); i != remove_records.end(); i++) {
+			records.remove(*i);
+		}
 	}
 }
 
