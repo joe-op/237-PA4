@@ -80,6 +80,16 @@ bool TreeIndex<T>::removePrimary(T key)
 				return false;
 			}
 		}
+		else {
+			TreeNode<T>* removedNode = root->remove(key, NULL);
+			if (removedNode != NULL) {
+				delete removedNode;
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 	}
 }
 
