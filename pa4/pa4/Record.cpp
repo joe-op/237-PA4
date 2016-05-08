@@ -8,6 +8,7 @@ Record::Record(string theNumber, string theLast,
 	firstName = theFirst;
 	age = theAge;
 	classNum = theClass;
+	is_deleted = false;
 }
 
 string Record::getNumber() const
@@ -39,4 +40,8 @@ void Record::print() const
 {
 	cout << number << " " << lastName << " " 
 		<< firstName << " " << age << " " << classNum << endl;
+}
+
+void Record::set_deleted(bool deleted) {
+	is_deleted = deleted;
 }

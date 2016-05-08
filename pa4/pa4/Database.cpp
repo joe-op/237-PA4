@@ -26,9 +26,11 @@ Database::Database(string filename)
 		string line;
 		while (!infile.eof()) {
 			getline(infile, line);
-			cout << line << endl;
-			Record r = parse_records(line);
-			records.push_back(r);
+			// require minimum length so exception is not thrown
+			if (line.length() >= 9) {
+				Record r = parse_records(line);
+				records.push_back(r);
+			}
 		}
 		infile.close();
 		for (vector<Record>::iterator i = records.begin(); i != records.end(); i++) {
@@ -146,6 +148,25 @@ bool Database::DeleteSecondary(KeyType primekey, KeyType k, char indexType)
 	cout << "DELETE ** SECONDARY KEY WITH WRONG INDEX TYPE" << endl;
 	return false;
 
+}
+
+bool Database::Delete(KeyType primekey) {
+	int age = 0;
+	bool found = false;
+	for (vector<Record>::iterator i = records.begin(); i != records.end(); i++) {
+		if (i->getNumber() == primekey.getKey1()) {
+			found = true;
+			age = i->getAge();
+			i->set_deleted(true);
+
+			i = records.end();
+		}
+	}
+	if (found) {
+		indexA.removeSecondary(age, primekey.getKey1());
+		indexS.removePrimary(primekey.getKey1());
+	}
+	return found;	
 }
 
 /*

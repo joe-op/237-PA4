@@ -20,12 +20,15 @@ public:
 	
 	void print() const;
 
+	void set_deleted(bool deleted);
+
 private:
 	string number;
 	string lastName;
 	string firstName;
 	int age;
 	int classNum;
+	bool is_deleted;
 
 };
 

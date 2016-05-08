@@ -28,6 +28,8 @@ public:
 	//Delete the record with primary key primekey from a non-primary key index specified by indexType
 	bool DeleteSecondary(KeyType primekey, KeyType k, char indexType);
 
+	bool Delete(KeyType primekey);
+
 
 private:
 	

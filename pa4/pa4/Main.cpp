@@ -64,6 +64,11 @@ void issueCommand(string line, Database* db)
 		char type = line.at(14);
 		db->DeleteSecondary(primeKey, secondaryKey, type);
 	}
+	else if (command == "DE")
+	{
+		KeyType key2(line.substr(3));
+		db->Delete(key2);
+	}
 	else
 	{
 		char indexType = line.at(3);
