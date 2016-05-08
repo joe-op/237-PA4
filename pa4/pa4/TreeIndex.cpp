@@ -1,12 +1,22 @@
 #include"TreeIndex.h"
 
-
+/*
+ * Insert record into index
+ * Input: key (string or int); pointer to record
+ * Output: none
+ */
 template<class T>
 void TreeIndex<T>::insert(T key, Record* record)
 {
 	insert(key, record, root);
 }
 
+/*
+ * Helper for insert method
+ * Insert record into index starting with subTreeRoot
+ * Input: key (string or int), pointer to record, pointer to TreeNode
+ * Output: none
+ */
 template<class T>
 void TreeIndex<T>::insert(T key, Record* record, TreeNode<T>* & subTreeRoot)
 {
@@ -27,19 +37,30 @@ void TreeIndex<T>::insert(T key, Record* record, TreeNode<T>* & subTreeRoot)
 	else {
 		cerr << "Key could not be placed";
 		exit(1);
-	}
-	//TODO: Refer to binary search tree sample code 
-	//Besides insert the key into the tree, you also need to insert record into the list records
-	
+	}	
 }
 
-
+/*
+ * Find a record
+ * Input: key (string or int)
+ * Output: Pointer to TreeNode
+ * This function takes a key and begins a recursive
+ * search at the root TreeNode.
+ * It returns a pointer to the TreeNode containing
+ * the key, or NULL if the key is not found.
+ */
 template<class T>
 TreeNode<T>* TreeIndex<T>::find(T key) const
 {
 	return find(key, root);
 }
 
+/*
+ * Helper method for find(T key)
+ * Input: key (string or int), TreeNode<T>* subTreeRoot
+ * Searches for key recursively by narrowing the location
+ * down to subTreeRoot.
+ */
 template<class T>
 TreeNode<T>* TreeIndex<T>::find(T key, TreeNode<T>* subTreeRoot) const
 {
@@ -60,6 +81,13 @@ TreeNode<T>* TreeIndex<T>::find(T key, TreeNode<T>* subTreeRoot) const
 	}
 }
 
+/*
+ * removePrimary: Removes key from the index
+ * Input: key (string or int)
+ * Output: bool
+ * Removes all records referred to by key from the index.
+ * Returns true if the record is found, false otherwise.
+ */
 template<class T>
 bool TreeIndex<T>::removePrimary(T key)
 {
@@ -93,6 +121,14 @@ bool TreeIndex<T>::removePrimary(T key)
 	}
 }
 
+/*
+ * Helper method for removePrimary
+ * Input: key (string or int), TreeNode<T> *parent
+ * Output: TreeNode<T>*
+ * Recursively searches for key.
+ * If it is found, rearranges the tree as necessary
+ * and returns a pointer to the TreeNode to be deleted.
+ */
 template<class T>
 TreeNode<T>* TreeNode<T>::remove(T key, TreeNode<T> *parent)
 {
@@ -129,6 +165,11 @@ TreeNode<T>* TreeNode<T>::remove(T key, TreeNode<T> *parent)
 	}
 }
 
+/*
+ * minRightSubTree(): Returns a pointer to the smallest value on the right subtree.
+ * Input: None
+ * Output: TreeNode<T>*
+ */
 template<class T>
 TreeNode<T>* TreeNode<T>::minRightSubTree() 
 {
@@ -140,11 +181,28 @@ TreeNode<T>* TreeNode<T>::minRightSubTree()
 	}
 }
 
+/*
+ * get_records(): Returns a pointer to the list records
+ * Input: none
+ * Output: pointer to list<Record*>
+ * Returns a pointer to the list of records
+ * for use in displaying the records associated
+ * with a key.
+ */
 template<class T>
 list<Record*> *TreeNode<T>::get_records() {
 	return &records;
 }
 
+/*
+ * removeSecondary: removes a record from a secondary index
+ * Input: T key, string primekey
+ * Output: bool
+ * Searches for a key (T) that contains the record with number primekey.
+ * If record is found, removes the record.
+ * If records is empty, removes key from the TreeIndex.
+ * Returns true if record is found, false otherwise.
+ */
 template<class T>
 bool TreeIndex<T>::removeSecondary(T key, string primekey)
 {
@@ -166,6 +224,14 @@ bool TreeIndex<T>::removeSecondary(T key, string primekey)
 	}
 }
 
+/*
+ * deleteSubtree: Deletes a subtree
+ * Input: TreeNode<T>*& subTreeRoot
+ * Output: none
+ * Recursively deletes leftlink and rightlink
+ * if subTreeRoot is not null.
+ * After deleting subtrees, deletes subTreeRoot.
+ */
 template<class T>
 void TreeIndex<T>::deleteSubtree(TreeNode<T>*& subTreeRoot)
 {
@@ -181,6 +247,10 @@ void TreeIndex<T>::deleteSubtree(TreeNode<T>*& subTreeRoot)
 	}
 }
 
+/*~TreeIndex: deletes a TreeIndex and its children
+ * Input: none
+ * Output: none
+ */
 template<class T>
 TreeIndex<T>::~TreeIndex()
 {
